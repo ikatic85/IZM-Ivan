@@ -92,7 +92,7 @@ const Home = () => {
                 </div>
             ))}
     </Slider>
-
+            <h3>Ovo je Lightbox</h3>
     <Lightbox1 />
         
      </div>  
