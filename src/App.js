@@ -14,6 +14,8 @@ import Detail from './components/pages/Detail';
 import Payment from './components/pages/Payment';
 import Admin from './components/pages/Admin';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
+import Register from './components/pages/Register';
+import Login from './components/pages/Login';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
         <Route path="/automobili" element={<Automobili />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogSingle />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
 
 

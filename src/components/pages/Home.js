@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Lightbox1 from "../parts/Lightbox1";
+import LocationSelectorGroup from "../parts/LocationSelectorGroup";
 
 
 const Home = () => {
@@ -12,6 +13,17 @@ const Home = () => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [posts, setPosts] = useState([]);
+
+    const [pickup, setPickup] = useState({ location: "", date: "", time: "" });
+    const [dropoff, setDropoff] = useState({ location: "", date: "", time: "" });
+
+    const handlePickupChange = (field, value) => {
+      setPickup((prev) => ({ ...prev, [field]: value }));
+    };
+
+    const handleDropoffChange = (field, value) => {
+      setDropoff((prev) => ({ ...prev, [field]: value }));
+    };
 
     useEffect(() => {
     const fetchPage = async () => {
@@ -73,6 +85,26 @@ const Home = () => {
 
     return(
         <>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+          <LocationSelectorGroup
+            title="Pick–Up"
+            locations={["Zagreb", "Split", "Rijeka", "Osijek"]}
+            values={pickup}
+            onChange={handlePickupChange}
+          />
+            </div>
+            <div className="col-md-6">
+          <LocationSelectorGroup
+            title="Drop–Off"
+            locations={["Zagreb", "Split", "Rijeka", "Osijek"]}
+            values={dropoff}
+            onChange={handleDropoffChange}
+          />
+          </div>
+        </div>
+        </div>
         <Automobili />
         <div dangerouslySetInnerHTML={{ __html: data.content.rendered }} />
 
@@ -82,21 +114,21 @@ const Home = () => {
                 <div className="">
         
 
-        <Slider {...settings}>
-            {posts.map(item => (
-                <div className="px-3" key={item.id}>
-                    <BlogCard
-                        item={item}
-                        column=""
-                    />
-                </div>
-            ))}
-    </Slider>
-            <h3>Ovo je Lightbox</h3>
-    <Lightbox1 />
+                  <Slider {...settings}>
+                      {posts.map(item => (
+                          <div className="px-3" key={item.id}>
+                              <BlogCard
+                                  item={item}
+                                  column=""
+                              />
+                          </div>
+                      ))}
+                  </Slider>
+                  <h3>Ovo je Lightbox</h3>
+                  <Lightbox1 />
         
-     </div>  
-    </div>     
+                </div>  
+          </div>     
 
         </>
     );
