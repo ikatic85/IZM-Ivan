@@ -9,7 +9,7 @@ const Admin = () => {
     useEffect(() => {
     const fetchPage = async () => {
         try {
-            const response = await fetch('https://wp1.edukacija.online/backend/wp-json/wp/v2/pages/181');
+            const response = await fetch('https://wp1.edukacija.online/backend/wp-json/wp/v2/pages/704');
             if (!response.ok) {
             throw new Error(`Došlo je do greške: ${response.status}`);
             }
@@ -28,7 +28,9 @@ const Admin = () => {
 
 
     return(
+        <div className ="container my-5">
         <div dangerouslySetInnerHTML={{ __html: data.content.rendered }} />
+        </div>
     );
 };
 

@@ -1,8 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 const Footer = () => {
 
     return (
-        <footer className="container-fluid">
+        <footer className="container">
 	<div className="row">
 		<div className="col-lg-6 col-md-12 col-6">
 			<img src="img/morent-logo.svg"/>
@@ -21,7 +22,7 @@ const Footer = () => {
 		<h4>Community</h4>
 			<ul>
 				<li><a href="">Events</a></li>
-				<li><a href="">Blog</a></li>
+				<li><Link to="/blog">Blog</Link></li>
 				<li><a href="">Podcast</a></li>
 				<li><a href="">Invite a friend</a></li>
 			</ul>
@@ -29,10 +30,10 @@ const Footer = () => {
 		<div className="col-lg-2 col-md-4 col-6">
 		<h4>Socials</h4>
 			<ul>
-				<li><a href="" target="_blank">Discord</a></li>
-				<li><a href="" target="_blank">Instagram</a></li>
-				<li><a href="" target="_blank">Twitter</a></li>
-				<li><a href="" target="_blank">Facebook</a></li>
+				<li><a href="https://discord.com/" target="_blank">Discord</a></li>
+				<li><a href="https://www.instagram.com/" target="_blank">Instagram</a></li>
+				<li><a href="https://x.com/twitter?lang=en" target="_blank">Twitter</a></li>
+				<li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
 			</ul>
 		</div>
 		<div className="col-12">

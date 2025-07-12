@@ -1,10 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
 
+    const username = localStorage.getItem("username");
+    const role = localStorage.getItem("role"); // ✅ Uzimanje korisničkog imena iz localStorage
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+      localStorage.removeItem("username");
+      localStorage.removeItem("role");
+      navigate("/login"); // ili "/" ako nemaš posebnu login stranicu
+    };
+
+
     return (
-        <header>
+      <header>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <a href="#" className="navbar-brand order-2 order-lg-1">
@@ -20,7 +33,7 @@ const Header = () => {
           <div className="collapse navbar-collapse main-nav order-lg-2" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto ms-auto mb-2 mb-lg-0 text-uppercase">
               <li className="nav-item">
-                <Link to="/" className="nav-link active" aria-current="page" href="#">Home</Link>
+                <Link to="/" className="nav-link" aria-current="page" href="#">Home</Link>
               </li>
               <li className="nav-item">
                 <Link to="/category" className="nav-link" href="#">Category</Link>
@@ -31,11 +44,16 @@ const Header = () => {
               <li className="nav-item">
                 <Link to="/payment" className="nav-link" href="#">Payment</Link>
               </li>
+              {role === "administrator" && (
+                <li className="nav-item">
+                  <Link to="/admin" className="nav-link">Admin</Link>
+                </li>
+              )}
               <li className="nav-item">
-                <Link to="/admin" className="nav-link" href="#">Admin</Link>
+                <Link to="/contact" className="nav-link" href="#">Contact Us</Link>
               </li>
               <li className="nav-item">
-                <Link to="/blog" className="nav-link" href="#">Blog</Link>
+                <Link to="/about-us" className="nav-link" href="#">About</Link>
               </li>
             </ul>
           </div>
@@ -57,14 +75,20 @@ const Header = () => {
               </li>
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="img/profil.svg" />
+                  <img  className="profile-photo" src="img/profil.svg" />
+                  {username && <span className="d-none d-lg-inline">{username}</span>}
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li><hr className="dropdown-divider"/></li>
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
+                  <li><a className="dropdown-item" href="/admin">Profil</a></li>
+                  <li><a className="dropdown-item" href="#">Postavke</a></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li>
+                    <button className="dropdown-item text-danger" onClick={handleLogout}>
+                      Odjavi se
+                    </button>
+                  </li>
                 </ul>
+
               </li>
             </ul>
         </div>

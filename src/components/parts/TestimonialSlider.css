@@ -1,0 +1,34 @@
+.testimonial-section {
+  background-color: #fff7e6;
+}
+
+.testimonial-card {
+  max-width: 600px;
+  background: #fff;
+  border-radius: 20px;
+}
+
+.testimonial-avatar {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 4px;
+  background-color: #999;
+}
+
+.carousel-indicators .active {
+  background-color: #444;
+}

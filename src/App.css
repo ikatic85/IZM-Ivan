@@ -103,6 +103,10 @@ button[aria-expanded="true"] .menu-icon span {
 	transform: scale(1.2);
 }
 
+.profile-photo{
+	width: 50px;
+	height: 50px;
+}
 
 /* --------------END OF HEADER SECTION ----------------- */
 
@@ -111,12 +115,13 @@ button[aria-expanded="true"] .menu-icon span {
 
 .banner{
 	height: 360px;
-/*	background-image: url('/img/banner-1-bg.svg');*/
+	background-image: url('./img/banner-1-bg.svg');
 	background-position: center;
 	background-color: var(--bg-light-blue);
 	border-radius: 10px;
 	color: var(--text-white);
 	padding: 20px;
+	margin-bottom: 30px;
 }
 
 .banner::after {
@@ -124,7 +129,7 @@ button[aria-expanded="true"] .menu-icon span {
 	display: block;
 	object-fit: contain;
 	width: 100%;
-/*	background-image: url('/img/koenigsegg-banner.svg');*/
+	background-image: url('./img/koenigsegg-banner.svg');
 	height: 108px;
 	background-size: contain;
 	background-repeat: no-repeat;
@@ -155,11 +160,11 @@ button[aria-expanded="true"] .menu-icon span {
 
 .banner-2{
 	background-color: var(--bg-blue);
-/*	background-image: url('../img/banner-2-bg.svg');*/
+	background-image: url('./img/banner-2-bg.svg');
 }
 
 .banner-2::after {
-/*	background-image: url('../img/nissan-gtr-banner.svg');*/
+	background-image: url('./img/nissan-gtr-banner.svg');
 }
 
 .banner-2 a{
@@ -247,11 +252,20 @@ button[aria-expanded="true"] .menu-icon span {
 	font-size: 12px;
 	color: var(--text-gray);
 	margin-top: 40px;
-	display: block;
 }
 
 .wrapper-search{
 	padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .filter-sidebar {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    margin-bottom: 30px;
+  }
 }
 
 /* ----------- POPULAR CARS SECTION -------------- */
@@ -331,15 +345,15 @@ section h4{
 }
 
 .car-card .car-fuel::before {
-/*	background-image: url('../img/fuel.svg');*/
+	background-image: url('./img/fuel.svg');
 }
 
 .car-card .car-gear::before {
-/*	background-image: url('../img/wheel.svg');*/
+   background-image: url('./img/wheel.svg');
 }
 
 .car-card .car-seats::before {
-/*	background-image: url('../img/seats.svg');*/
+	background-image: url('./img/seats.svg');
 }
 
 .car-card .car-button{
@@ -422,6 +436,7 @@ section h4{
       flex-direction: column;
 }
 
+
 .form-field label {
       font-weight: bold;
       margin-bottom: 6px;
@@ -462,6 +477,8 @@ section h4{
 .data span img{
 	margin-top: 30px;
 	margin-bottom: 30px;
+	width: 32px;
+	height: 32px;
 }
 
 .form-header p, .data .data-p2, .form-field input::placeholder, .form-field .city-select, .summary p {
@@ -515,6 +532,7 @@ section h4{
     font-size: 1rem;
     background-color: var(--bg-gray);
 	margin-top: 20px;
+	justify-content: space-between;
 }
 
 
@@ -637,6 +655,27 @@ input[type="radio"], input[type="checkbox"] {
 
 .rental, .total{
 	align-content: center;
+}
+
+#rating span {
+  color: #ccc;
+}
+#rating span.filled {
+  color: #f8ce0b;
+}
+.promo-container {
+  display: flex;
+  margin-top: 10px;
+}
+.promo-input {
+  flex: 1;
+  padding: 8px;
+}
+.apply-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
 }
 
 /* ------------- FOOTER SECTION ------------ */
@@ -1241,4 +1280,40 @@ footer .row:not(.copyright) a:hover{
 	font-size: 50px;
 	font-weight: 700;
 	color: var(--text-white);	
+}
+
+
+.password-field span svg {
+    height: 14px;
+	opacity: 0.5;
+}
+
+.password-field span {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+	cursor: pointer;
+}
+
+.password-field {
+    position: relative;
+}
+
+/* ------------------ END OF BLOG SINGLE PAGE------------------- */
+
+/* ------------------ CONTACT PAGE ------------------- */
+
+.bg-contact-left{
+	background-color: #ededf8;
+}
+
+.-bg-contact-right{
+	background-color: #f0f0f5;
+}
+
+/* ------------------ END OF CONTACT PAGE ------------------- */
+/* ------------------ ABOUT US PAGE ------------------- */
+
+.visit{
+	margin-top: 30px;
 }

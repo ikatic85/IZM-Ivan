@@ -1,11 +1,12 @@
-import logo from './logo.svg';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './gutenberg.css';
 import './App.css';
 import Automobili from './components/pages/Automobili'; 
 import Blog from './components/pages/Blog';
 import BlogSingle from './components/pages/BlogSingle';
-
+import BlogCard from './components/parts/BlogCard.js';
 import Footer from './components/sections/Footer';
 import Header from './components/sections/Header';
 import Home from './components/pages/Home';
@@ -16,6 +17,14 @@ import Admin from './components/pages/Admin';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import Register from './components/pages/Register';
 import Login from './components/pages/Login';
+import CarFilterSidebar from './components/parts/CarFilterSidebar.js';
+import RentalSummary from './components/parts/RentalSummary';
+import AutomobilCard from './components/parts/AutomobilCard.js';
+import Banners from './components/parts/Banners.js';
+import ContactPage from './components/pages/ContactPage.js';
+import AboutUs from './components/pages/AboutUs.js';
+import TestimonialSlider from './components/parts/TestimonialSlider.js';
+
 
 function App() {
   return (
@@ -33,8 +42,17 @@ function App() {
         <Route path="/automobili" element={<Automobili />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogSingle />} />
+        <Route path="/blog-card" element={<BlogCard />} />
+        <Route path="/automobil-card" element={<AutomobilCard />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/filter" element={<CarFilterSidebar />} />
+        <Route path="/rental-summary" element={<RentalSummary />} />
+        <Route path="/automobil-card" element={<AutomobilCard />} />
+        <Route path="/banners" element={<Banners />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/testimonials" element={<TestimonialSlider />} />
       </Routes>
 
 
@@ -46,3 +64,5 @@ function App() {
 }
 
 export default App;
+
+

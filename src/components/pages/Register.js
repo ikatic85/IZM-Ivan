@@ -12,6 +12,39 @@ const Register = () => {
 
   const [successMessage, setSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [error, setError] = useState(null);
+
+  // Funkcija za dohvaćanje tokena
+  const getToken = async () => {
+
+    try {
+      const response = await fetch("https://wp1.edukacija.online/backend/wp-json/jwt-auth/v1/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username:"Ivan85",
+          password:"OmRr dGK4 XLwr GS0G H1AS 1UNX"
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        return data.token;  // ✅ Vraća token
+      } else {
+        // ✅ Ekstrakcija samo teksta iz eventualnog HTML-a
+        const parser = new DOMParser();
+        const parsedHtml = parser.parseFromString(data.message, 'text/html');
+        const cleanMessage = parsedHtml.body.textContent || "Greška prilikom prijave.";
+
+        setError(cleanMessage);
+      }
+    } catch (err) {
+      setError("Greška u mreži. Pokušajte ponovno.");
+    }
+  };
 
   const handleChange = (e) => {
     setFormData((prevData) => ({
@@ -28,7 +61,7 @@ const Register = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}` // Ako je potrebno
+          "Authorization": "Bearer " + await getToken()  // ✅ Koristi funkciju za dohvaćanje tokena
         },
         body: JSON.stringify(formData)
       });
