@@ -76,7 +76,8 @@ const Home = () => {
           <h2 className="text-center mb-4">Popular Cars</h2>
           <p className="text-center mb-5">Find the perfect car for your next adventure.</p>
           </div>
-        <Automobili />   
+        <Automobili colClass="col-md-6 col-lg-3" limit={20} />
+   
         </>
     );
 };

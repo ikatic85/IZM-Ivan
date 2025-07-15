@@ -17,9 +17,9 @@ import Admin from './components/pages/Admin';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import Register from './components/pages/Register';
 import Login from './components/pages/Login';
-import CarFilterSidebar from './components/parts/CarFilterSidebar.js';
+import CarFilterSidebar from './components/parts/FilterSidebar.js';
 import RentalSummary from './components/parts/RentalSummary';
-import AutomobilCard from './components/parts/AutomobilCard.js';
+import CarCard from './components/parts/CarCard.js';
 import Banners from './components/parts/Banners.js';
 import ContactPage from './components/pages/ContactPage.js';
 import AboutUs from './components/pages/AboutUs.js';
@@ -43,12 +43,11 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogSingle />} />
         <Route path="/blog-card" element={<BlogCard />} />
-        <Route path="/automobil-card" element={<AutomobilCard />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/filter" element={<CarFilterSidebar />} />
         <Route path="/rental-summary" element={<RentalSummary />} />
-        <Route path="/automobil-card" element={<AutomobilCard />} />
+        <Route path="/car-card" element={<CarCard />} />
         <Route path="/banners" element={<Banners />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about-us" element={<AboutUs />} />

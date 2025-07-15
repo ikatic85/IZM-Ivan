@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import CarCard from '../parts/CarCard'; // Adjust path as needed
 import { Link } from 'react-router-dom';
 
-
-const Automobili = ({cars}) => {
+const Automobili = ({ cars = null, colClass = 'col-md-6 col-lg-4', limit = null }) => {
     const [automobili, setAutomobili] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        if (cars) {
+            setAutomobili(cars);
+            return;
+        }
+
         const fetchAutomobili = async () => {
             try {
                 const response = await fetch('https://wp1.edukacija.online/backend/wp-json/wp/v2/automobil/?_embed&per_page=20');
@@ -21,67 +26,23 @@ const Automobili = ({cars}) => {
         };
 
         fetchAutomobili();
-    }, []);
+    }, [cars]);
 
-    const getTermNameByTaxonomy = (terms, taxonomyName) => {
-        if (!terms || !Array.isArray(terms)) return null;
-
-        for (const termGroup of terms) {
-            for (const term of termGroup) {
-            if (term.taxonomy === taxonomyName) {
-                return term.name;
-            }
-            }
-        }
-
-        return null;
-        };
-     console.log(cars);
+    const displayedCars = limit ? automobili.slice(0, limit) : automobili;
 
     return (
         <div className="komp-automobili container my-5">
+            {error && <div className="alert alert-danger">{error}</div>}
+
             <div className="row">
-                {automobili.map((automobil) => (
-                <div className="col-md-6 col-lg-4">
-                    <div className="car-card">
-                        <div className="d-flex like">
-                            <Link to="/detail"><h5>{automobil.title.rendered}</h5></Link>
-                            <Link to="#" className="like-full"><img src="img/heart.svg" alt="Like" /></Link>
-                        </div>
-                        <p className="car-type">
-                            <Link to="#">{getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "karoserija")}</Link>
-                        </p>
-                        <Link to="/detail" className="car-img">
-                            <img
-                                src={automobil._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url}
-                                alt={automobil.title.rendered}
-                                className="img-fluid"
-                            />
-                        </Link>
-                        <div className="d-flex">
-                            <div className="car-fuel">
-                                {getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "tank")} L
-                            </div>
-                            <div className="car-gear">
-                                {getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "mjenjac")}
-                            </div>
-                            <div className="car-seats">
-                                {getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "sjedalo")}
-                            </div>
-                        </div>
-                        <div className="d-flex">
-                            <div className="car-price">
-                                {getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "cijena")}<span>/day</span>
-                            </div>
-                            <div className="car-button">
-                                <Link to="/detail" className="btn btn-primary">Rent Now</Link>
-                            </div>
-                        </div>
+                {displayedCars.map((automobil) => (
+                    <div className={`${colClass} mb-4`} key={automobil.id}>
+                        <CarCard automobil={automobil} />
                     </div>
-                </div>
                 ))}
             </div>
-        </div>  
+        </div>
     );
 };
+
 export default Automobili;
