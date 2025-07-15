@@ -16,7 +16,7 @@ const RentalSummary = ({ selectedCar, pickupDate, dropoffDate }) => {
   const total = subtotal * totalDays;
 
   return (
-    <div className="col-12 col-md-12 col-lg-4 form-section summary">
+    <div className="col-12 col-lg-4 form-section summary">
       <h4>Rental Summary</h4>
       <p>
         Prices may change depending on the length of the rental and the price of your rental car.

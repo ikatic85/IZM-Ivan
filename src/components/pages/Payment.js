@@ -24,6 +24,7 @@ const RentalForm = () => {
 
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
+  const [selectedCar, setSelectedCar] = useState(null);
 
   useEffect(() => {
     if (message) {
@@ -92,7 +93,8 @@ const RentalForm = () => {
   return (
     <section class="container">
       <div class="row flex-layout">
-    <form className="col-md-12 col-lg-8" onSubmit={handleSubmit}>
+        <div className="col-md-8 col-sm-12">
+    <form onSubmit={handleSubmit}>
       {message && (
         <div className={`alert alert-${messageType === 'success' ? 'success' : 'danger'} text-center`} role="alert">
           {message}
@@ -264,6 +266,14 @@ const RentalForm = () => {
         </div>
       </div>
     </form>
+    </div>
+      <div className="col-md-4 col-sm-12">
+        <RentalSummary
+          selectedCar={selectedCar}
+          pickupDate={formData.pickupDate}
+          dropoffDate={formData.dropoffDate}
+        />
+      </div>
       </div>
     </section>  
   );

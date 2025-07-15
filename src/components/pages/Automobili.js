@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import AutomobilCard from '../parts/AutomobilCard';
 
 
 const Automobili = ({cars}) => {
@@ -42,16 +41,45 @@ const Automobili = ({cars}) => {
     return (
         <div className="komp-automobili container my-5">
             <div className="row">
-                
-
                 {automobili.map((automobil) => (
-                    <AutomobilCard
-                        key={automobil.id}
-                        automobil={automobil}
-                        column="col-md-6 col-lg-3"
-                    />
+                <div className="col-md-6 col-lg-4">
+                    <div className="car-card">
+                        <div className="d-flex like">
+                            <Link to="/detail"><h5>{automobil.title.rendered}</h5></Link>
+                            <Link to="#" className="like-full"><img src="img/heart.svg" alt="Like" /></Link>
+                        </div>
+                        <p className="car-type">
+                            <Link to="#">{getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "karoserija")}</Link>
+                        </p>
+                        <Link to="/detail" className="car-img">
+                            <img
+                                src={automobil._embedded?.["wp:featuredmedia"]?.[0]?.media_details?.sizes?.medium_large?.source_url}
+                                alt={automobil.title.rendered}
+                                className="img-fluid"
+                            />
+                        </Link>
+                        <div className="d-flex">
+                            <div className="car-fuel">
+                                {getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "tank")} L
+                            </div>
+                            <div className="car-gear">
+                                {getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "mjenjac")}
+                            </div>
+                            <div className="car-seats">
+                                {getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "sjedalo")}
+                            </div>
+                        </div>
+                        <div className="d-flex">
+                            <div className="car-price">
+                                {getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "cijena")}<span>/day</span>
+                            </div>
+                            <div className="car-button">
+                                <Link to="/detail" className="btn btn-primary">Rent Now</Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 ))}
-
             </div>
         </div>  
     );

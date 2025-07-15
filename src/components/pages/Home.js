@@ -72,8 +72,11 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Automobili />
-        <div dangerouslySetInnerHTML={{ __html: data.content.rendered }} />     
+        <div className="container my-5">
+          <h2 className="text-center mb-4">Popular Cars</h2>
+          <p className="text-center mb-5">Find the perfect car for your next adventure.</p>
+          </div>
+        <Automobili />   
         </>
     );
 };
