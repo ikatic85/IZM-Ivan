@@ -35,9 +35,9 @@ const Header = () => {
               <li className="nav-item">
                 <Link to="/category" className="nav-link">Category</Link>
               </li>
-              <li className="nav-item">
+             {/* <li className="nav-item">
                 <Link to="/detail" className="nav-link">Detail</Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link to="/payment" className="nav-link">Payment</Link>
               </li>
@@ -56,9 +56,9 @@ const Header = () => {
           </div>
           <ul className="navbar-nav align-items-center mobile-menu order-3">
             <li className="nav-item">
-              <a className="nav-link nav-icon" href="#">
+              <Link to="/favorites">
                 <img src="img/heart-nav.svg" alt="Heart" />
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link nav-icon" href="#">

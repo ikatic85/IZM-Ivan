@@ -1,67 +1,64 @@
-import React from "react";
+// components/RentalSummary.js
+import React from 'react';
 
+const RentalSummary = ({ car, pickup, dropoff }) => {
+  if (!car) return null;
 
-const RentalSummary = ({ selectedCar, pickupDate, dropoffDate }) => {
-  if (!selectedCar) return null;
+  const pricePerDay = parseFloat(car._embedded?.["wp:term"]?.flat()?.find(t => t.taxonomy === "cijena")?.name || "0");
 
-  const getTotalDays = (start, end) => {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
-    const timeDiff = endDate - startDate;
-    return Math.max(1, Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));
+  const getDays = () => {
+    if (!pickup?.date || !dropoff?.date) return 0;
+    const start = new Date(pickup.date);
+    const end = new Date(dropoff.date);
+    const diff = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+    return diff > 0 ? diff : 0;
   };
 
-  const totalDays = getTotalDays(pickupDate, dropoffDate);
-  const subtotal = selectedCar.price;
-  const total = subtotal * totalDays;
+  const days = getDays();
+  const total = pricePerDay * days;
 
   return (
-    <div className="col-12 col-lg-4 form-section summary">
+    <div className="p-3 border rounded bg-light">
       <h4>Rental Summary</h4>
-      <p>
-        Prices may change depending on the length of the rental and the price of your rental car.
-      </p>
+      <p className="text-muted">Prices may change depending on the length of rental.</p>
 
-      <div className="d-flex mt-5">
+      <div className="d-flex align-items-center mt-4">
+        <img src={car.acf?.slika1} alt={car.title.rendered} width="100" className="me-3 rounded" />
         <div>
-          <img src={selectedCar.image} alt={selectedCar.name} />
-        </div>
-        <div className="m-auto div-h">
-          <h2>{selectedCar.name}</h2>
-          <div>
-            <div id="rating">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className={i < selectedCar.rating ? "filled" : ""}>★</span>
-              ))}
-            </div>
-            <div className="reviewers">
-              <p>{selectedCar.reviews}+ Reviewer</p>
-            </div>
-          </div>
+          <h5>{car.title.rendered}</h5>
+          <p className="mb-1 text-muted">440+ Reviews</p>
         </div>
       </div>
 
       <hr />
-      <div className="d-flex mt-4 sub">
-        <span>Subtotal</span>
-        <span>${subtotal.toFixed(2)}</span>
+
+      <div className="d-flex justify-content-between">
+        <span>Pickup location</span><span>{pickup.location}</span>
       </div>
-      <div className="d-flex sub">
-        <span>Tax</span>
-        <span>$0</span>
+      <div className="d-flex justify-content-between">
+        <span>Dropoff location</span><span>{dropoff.location}</span>
+      </div>
+      <div className="d-flex justify-content-between">
+        <span>Rent duration</span><span>{days} days</span>
+      </div>
+      <div className="d-flex justify-content-between">
+        <span>Price per day</span><span>${pricePerDay}</span>
+      </div>
+      <div className="d-flex justify-content-between">
+        <span>Tax</span><span>$0</span>
       </div>
 
-      <div className="promo-container">
-        <input className="promo-input" type="text" placeholder="Apply promo code" />
-        <button className="apply-button">Apply now</button>
+      <div className="mt-4">
+        <input className="form-control" type="text" placeholder="Apply promo code" />
+        <button className="btn btn-secondary w-100 mt-2">Apply now</button>
       </div>
 
-      <div className="d-flex justify-content-between mt-5">
-        <div className="rental">
-          <h4>Total rental price</h4>
-          <p>Overall price and includes rental discount</p>
+      <div className="d-flex justify-content-between mt-4">
+        <div>
+          <h5>Total rental price</h5>
+          <small className="text-muted">Includes any applicable discounts</small>
         </div>
-        <div className="total">${total.toFixed(2)}</div>
+        <h5>${total.toFixed(2)}</h5>
       </div>
     </div>
   );

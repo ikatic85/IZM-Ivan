@@ -17,13 +17,18 @@ import Admin from './components/pages/Admin';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import Register from './components/pages/Register';
 import Login from './components/pages/Login';
-import CarFilterSidebar from './components/parts/FilterSidebar.js';
+import FilterSidebar from './components/parts/FilterSidebar.js';
 import RentalSummary from './components/parts/RentalSummary';
 import CarCard from './components/parts/CarCard.js';
 import Banners from './components/parts/Banners.js';
 import ContactPage from './components/pages/ContactPage.js';
 import AboutUs from './components/pages/AboutUs.js';
 import TestimonialSlider from './components/parts/TestimonialSlider.js';
+import RentalForm from './components/parts/RentalForm.js';
+import Favorites from './components/pages/Favorites';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 
 
 function App() {
@@ -45,13 +50,15 @@ function App() {
         <Route path="/blog-card" element={<BlogCard />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/filter" element={<CarFilterSidebar />} />
+        <Route path="/filter" element={<FilterSidebar />} />
         <Route path="/rental-summary" element={<RentalSummary />} />
         <Route path="/car-card" element={<CarCard />} />
         <Route path="/banners" element={<Banners />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/testimonials" element={<TestimonialSlider />} />
+        <Route path="/rental-form" element={<RentalForm />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
 
 

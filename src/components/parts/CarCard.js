@@ -1,5 +1,4 @@
-// src/components/CarCard.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const getTermNameByTaxonomy = (terms, taxonomyName) => {
@@ -15,13 +14,56 @@ const getTermNameByTaxonomy = (terms, taxonomyName) => {
 };
 
 const CarCard = ({ automobil }) => {
+    const [liked, setLiked] = useState(false);
+
+    useEffect(() => {
+        // Check if this car is already liked (optional persistent state)
+        const likedCars = JSON.parse(localStorage.getItem("likedCars") || "[]");
+        if (likedCars.includes(automobil.id)) {
+            setLiked(true);
+        }
+    }, [automobil.id]);
+
+    const [clicked, setClicked] = useState(false);
+
+    const handleLikeClick = () => {
+        const isLoggedIn = localStorage.getItem("username");
+
+        if (!isLoggedIn) {
+            alert("Please log in to save this car to your favorites.");
+            return;
+        }
+
+        const updatedLiked = !liked;
+        setLiked(updatedLiked);
+
+        // Animate icon
+        setClicked(true);
+        setTimeout(() => setClicked(false), 200); // Reset after animation
+
+        // Save liked cars to localStorage
+        let likedCars = JSON.parse(localStorage.getItem("likedCars") || "[]");
+
+        if (updatedLiked) {
+            likedCars.push(automobil.id);
+        } else {
+            likedCars = likedCars.filter(id => id !== automobil.id);
+        }
+
+        localStorage.setItem("likedCars", JSON.stringify(likedCars));
+    };
+
     return (
         <div className="car-card h-100 d-flex flex-column">
             <div className="d-flex justify-content-between like">
                 <Link to="/detail"><h5>{automobil.title.rendered}</h5></Link>
-                <Link to="#" className="like-full">
-                    <img src="/img/heart.svg" alt="Like" />
-                </Link>
+                <button className="like-full btn p-0 border-0 bg-transparent" onClick={handleLikeClick}>
+                    <img
+                        src={liked ? "/img/heart-filled.svg" : "/img/heart.svg"}
+                        alt={liked ? "Liked" : "Like"}
+                        className={`heart-icon ${clicked ? "clicked" : ""}`}
+                    />
+                </button>
             </div>
             <p className="car-type">
                 <Link to="#">
@@ -51,7 +93,7 @@ const CarCard = ({ automobil }) => {
                     {getTermNameByTaxonomy(automobil._embedded?.["wp:term"], "cijena")}<span>/day</span>
                 </div>
                 <div className="car-button">
-                    <Link to="/detail" className="btn btn-primary">Rent Now</Link>
+                    <Link to="/payment" className="btn btn-primary">Rent Now</Link>
                 </div>
             </div>
         </div>

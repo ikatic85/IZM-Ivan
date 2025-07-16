@@ -20,7 +20,7 @@ const FilterSidebar = ({ filters, setFilters, uniqueTypes, uniqueSeats, typeCoun
 
   return (
     <aside className="col-md-3 col-12 mb-4 filter-sidebar">
-      <div className="bg-light p-4 rounded shadow-sm">
+      <div className="sidebar filter-sidebar p-4 rounded shadow-sm">
         {/* TYPE FILTER */}
         <div className="mb-4">
           <h6 className="fw-bold text-uppercase">Type</h6>
